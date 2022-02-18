@@ -122,4 +122,43 @@ public class TutorialController {
 		}
 	}
 
+	@DeleteMapping(path = "/eliminar{title}")
+	public ResponseEntity<HttpStatus> deleteTutorialsByTitle(@RequestParam(value = "title") String title) {
+		try {
+			List<Tutorial> listTutorial = this.tutorialRepository.findByTitleContaining(title);
+			Tutorial currTutorial = listTutorial.get(0);
+			tutorialRepository.delete(currTutorial);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+
+	}
+
+	@PutMapping(path = "/actualizar{title}")
+	public ResponseEntity<Tutorial> updateTutorialByTitle(@RequestParam(value = "title") String title, @RequestBody Tutorial tutorial) {
+		List<Tutorial> tutorialData = tutorialRepository.findByTitleContaining(title);
+		if (!tutorialData.isEmpty()) {
+			Tutorial currTutorial = tutorialData.get(0);
+			currTutorial.setTitle(tutorial.getTitle());
+			currTutorial.setDescription(tutorial.getDescription());
+			currTutorial.setPublished(tutorial.isPublished());
+			return new ResponseEntity<>(tutorialRepository.save(currTutorial), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@GetMapping(path = "/precio/tutoriales/{price}")
+	public ResponseEntity<List<Tutorial>> getTutorialByPrice(@PathVariable("price") Double price) {
+		try {
+			List<Tutorial> tutorialData = tutorialRepository.findByPrice(price);
+			if (!tutorialData.isEmpty()) {
+				return new ResponseEntity<>(tutorialData, HttpStatus.OK);
+			}
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}catch (Exception e){
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+
 }

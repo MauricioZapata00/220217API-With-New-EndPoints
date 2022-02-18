@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "tutorials")
 public class Tutorial {
 
+	private static final double DEFAULT_PRICE = 100.00;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -19,14 +20,24 @@ public class Tutorial {
 	@Column(name = "published")
 	private boolean published;
 
+	@Column(name = "price")
+	private double price;
 	public Tutorial() {
-
+		this.price = DEFAULT_PRICE;
 	}
 
 	public Tutorial(String title, String description, boolean published) {
 		this.title = title;
 		this.description = description;
 		this.published = published;
+		this.price = DEFAULT_PRICE;
+	}
+
+	public Tutorial(String title, String description, boolean published, double price) {
+		this.title = title;
+		this.description = description;
+		this.published = published;
+		this.price = price;
 	}
 
 	public long getId() {
@@ -59,9 +70,22 @@ public class Tutorial {
 		this.published = isPublished;
 	}
 
-	@Override
-	public String toString() {
-		return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+	public double getPrice() {
+		return this.price;
 	}
 
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Tutorial{" +
+				"id=" + id +
+				", title='" + title + '\'' +
+				", description='" + description + '\'' +
+				", published=" + published +
+				", price=" + price +
+				'}';
+	}
 }
