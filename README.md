@@ -9,8 +9,8 @@ This API has the next changes:
 3. **Get all the tutorials by the tutorial's price**
 ![GET_Tutorial_Using_Price](images/Captura%20de%20pantalla%20de%202022-02-17%2019-52-24.png)
 
-As you can see, there are pictures above which shows the funtionality of the API with the new endpoints.
+As you can see, there are pictures above which shows the functionality of the API with the new endpoints.
 
-The comments are made in spanish because I got frustraded trying to Debugg my program, but the fact was that everything was good and I was sending bad the requests and the bodies in Postman :joy: :joy: :stuck_out_tongue_winking_eye:
+The comments are made in spanish because I got frustrated trying to Debug my program, but the fact was that everything was good, and I was sending bad the requests and the bodies in Postman :joy: :joy: :stuck_out_tongue_winking_eye:
 
 
